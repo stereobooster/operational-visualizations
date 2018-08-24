@@ -54732,7 +54732,7 @@ var Header = function Header() {
     return React.createElement(components_1.HeaderBar, { logo: React.createElement(components_1.Logo, { name: "OperationalUI" }), end: React.createElement(Version, null, "v", version) });
 };
 var LandingPage = function LandingPage() {
-    return React.createElement(components_1.Splash, { color: "#6B42B7", title: "Operational Visualizations", actions: React.createElement(React.Fragment, null, React.createElement(components_1.Button, { to: "/visual-tests" }, "Visual Tests"), React.createElement(components_1.Button, { to: "https://github.com/contiamo/operational-visualizations/" }, "GitHub")) }, React.createElement("p", null, "Operational Visualizations .."));
+    return React.createElement(components_1.Splash, { color: "#343972", title: "Operational Visualizations", actions: React.createElement(React.Fragment, null, React.createElement(components_1.Button, { to: "/visual-tests" }, "Explore"), React.createElement(components_1.Button, { to: "https://github.com/contiamo/operational-visualizations/" }, "GitHub")) }, React.createElement("p", null, "Operational Visualizations is a set of robust and opinionated visualizations ready for enterprise volume and complexity, from simple line charts to fully custom process visualization algorithms."), React.createElement("p", null, "Just bring your own data \uD83E\uDD13"));
 };
 exports.default = LandingPage;
 var templateObject_1;
@@ -55135,22 +55135,6 @@ exports.default = MarathonRendererComponent;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
- * Returns the index of the first element that matches a condition.
- */
-var findIndex = function findIndex(condition) {
-    return function (array) {
-        var match = array.map(function (member, index) {
-            return condition(member, index) ? [member, index] : null;
-        }).filter(function (memberWithIndex) {
-            return memberWithIndex !== null;
-        })[0];
-        if (!match) {
-            return null;
-        }
-        return match[1];
-    };
-};
 /**
  * Finds a test from the pathname, also returning whether an exact path match was found so that a redirct may take place.
  */
@@ -55169,10 +55153,10 @@ exports.fromPathname = function (testGroups) {
         if (!groupSlug) {
             return defaultTest;
         }
-        var groupIndex = findIndex(function (testCase, index) {
+        var groupIndex = testGroups.findIndex(function (testCase, index) {
             return testCase.slug === groupSlug;
-        })(testGroups);
-        if (groupIndex === null) {
+        });
+        if (!groupIndex === null) {
             return defaultTest;
         }
         if (!testSlug) {
@@ -55182,10 +55166,10 @@ exports.fromPathname = function (testGroups) {
             };
         }
         var group = testGroups[groupIndex];
-        var testIndex = findIndex(function (_c, index) {
+        var testIndex = group.children.findIndex(function (_c, index) {
             var slug = _c.slug;
             return slug === testSlug;
-        })(group.children);
+        });
         if (testIndex === null) {
             return {
                 groupIndex: groupIndex,
@@ -94692,7 +94676,6 @@ var VisualTests = /** @class */function (_super) {
         var pathInfo = TestCases_1.fromPathname(this.props.pathname);
         var groupIndex = pathInfo.groupIndex,
             testIndex = pathInfo.testIndex;
-        var test = TestCases_1.default[groupIndex].children[testIndex].marathon;
         return React.createElement(components_1.Layout, { header: React.createElement(components_1.HeaderBar, { main: React.createElement("h3", null, "Visual Tests"), logo: React.createElement(components_1.Logo, { name: "OperationalUI", to: "/" }) }), sidenav: React.createElement(components_1.Sidenav, null, TestCases_1.default.map(function (test, groupIndex) {
                 return React.createElement(components_1.SidenavHeader, { key: groupIndex, to: TestCases_1.toPathname({ groupIndex: groupIndex, testIndex: 0 }), label: test.title, active: true }, test.children.map(function (test, testIndex) {
                     var pathname = TestCases_1.toPathname({ groupIndex: groupIndex, testIndex: testIndex });
@@ -94704,7 +94687,7 @@ var VisualTests = /** @class */function (_super) {
                                 isLooping: !prevState.isLooping
                             };
                         });
-                    } }, this.state.isLooping ? "Pause" : "Run all")) }, React.createElement(components_1.Card, null, pathInfo.exactPath && React.createElement(Marathon_1.default, { test: test, onCompleted: function onCompleted() {
+                    } }, this.state.isLooping ? "Pause" : "Run all")) }, React.createElement(components_1.Card, null, pathInfo.exactPath && React.createElement(Marathon_1.default, { test: TestCases_1.default[groupIndex].children[testIndex].marathon, onCompleted: function onCompleted() {
                     if (_this.state.isLooping) {
                         _this.props.pushState(TestCases_1.toPathname(TestCases_1.next({ groupIndex: groupIndex, testIndex: testIndex })));
                     }
@@ -94753,7 +94736,7 @@ var components_1 = require("@operational/components");
 var LandingPage_1 = __importDefault(require("./LandingPage"));
 var VisualTests_1 = __importDefault(require("./VisualTests"));
 // Allow the app to work on GitHub pages without hash URL's
-var basePath = "/operational/visualizations";
+var basePath = "/operational-visualizations";
 // Extract the path from window location
 var getPathname = function getPathname() {
     return window.location.pathname.replace(basePath, "");
@@ -94819,7 +94802,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58840' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60744' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
