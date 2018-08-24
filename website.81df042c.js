@@ -54609,12 +54609,12 @@ module.exports = {
     "dev": "parcel scripts/dev-server/index.html",
     "start": "parcel website/index.html",
     "build": "run-p build:*",
-    "build:app": "parcel build visual-tests/index.html --public-url .",
+    "build:app": "parcel build website/index.html --public-url .",
     "build:package": "rimraf lib && tsc",
-    "prettify": "prettier 'src/**/*.{ts,tsx}' --write",
+    "deploy": "npm run build && gh-pages -d dist",
     "test": "jest",
     "prepublish": "npm run package",
-    "prettier": "prettier 'visual-tests/**/*.{ts,tsx}' --write",
+    "prettier": "prettier 'website/**/*.{ts,tsx}' --write",
     "precommit": "npm run prettier && git add ."
   },
   "dependencies": {
@@ -94752,21 +94752,27 @@ var react_dom_1 = require("react-dom");
 var components_1 = require("@operational/components");
 var LandingPage_1 = __importDefault(require("./LandingPage"));
 var VisualTests_1 = __importDefault(require("./VisualTests"));
+// Allow the app to work on GitHub pages without hash URL's
+var basePath = "/operational/visualizations";
+// Extract the path from window location
+var getPathname = function getPathname() {
+    return window.location.pathname.replace(basePath, "");
+};
 var Website = /** @class */function (_super) {
     __extends(Website, _super);
     function Website() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = { pathname: window.location.pathname };
+        _this.state = { pathname: getPathname() };
         _this.pushState = function (newUrl) {
             _this.setState(function () {
                 return { pathname: newUrl };
             });
-            window.history.pushState({}, "", newUrl);
+            window.history.pushState({}, "", "" + basePath + newUrl);
         };
         _this.handlePopState = function () {
             _this.setState(function () {
                 return {
-                    pathname: window.location.pathname
+                    pathname: getPathname()
                 };
             });
         };
@@ -94813,7 +94819,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55897' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58840' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
