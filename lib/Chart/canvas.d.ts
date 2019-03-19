@@ -1,0 +1,45 @@
+import { Canvas, D3Selection, EventBus, State, StateWriter } from "./typings";
+declare class ChartCanvas implements Canvas {
+    private chartContainer;
+    private drawingContainer;
+    private drawingGroup;
+    private el;
+    private elMap;
+    private events;
+    private state;
+    private stateWriter;
+    constructor(state: State, stateWriter: StateWriter, events: EventBus, context: Element);
+    draw(): void;
+    remove(): void;
+    elementFor(component: string): D3Selection;
+    private renderChartContainer;
+    private onMouseEnter;
+    private onMouseLeave;
+    private onClick;
+    private onMouseMove;
+    private renderDrawingContainer;
+    private renderLegends;
+    private renderLegend;
+    private insertLegend;
+    private appendLegend;
+    private legendHeight;
+    private totalLegendHeight;
+    private renderEl;
+    private renderDrawingGroup;
+    private renderRules;
+    private renderAxes;
+    private renderSeriesDrawingGroups;
+    private renderFocusElements;
+    private renderFocusGroup;
+    private renderFocusLabel;
+    private renderComponentFocus;
+    private renderClipPaths;
+    private renderClipPath;
+    private prefixedId;
+    private margin;
+    private calculateDrawingContainerDims;
+    private calculateDrawingDims;
+    private updateClipPaths;
+}
+export default ChartCanvas;
+//# sourceMappingURL=canvas.d.ts.map

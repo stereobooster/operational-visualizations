@@ -1,0 +1,1 @@
+{"version":3,"file":"renderer.d.ts","sourceRoot":"","sources":["../../../src/PieChart/renderers/renderer.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,WAAW,EAAE,QAAQ,EAAE,eAAe,EAAE,KAAK,EAAE,MAAM,YAAY,CAAA;AAG1E,cAAM,QAAQ;gBACA,KAAK,EAAE,KAAK,EAAE,MAAM,EAAE,QAAQ,EAAE,EAAE,EAAE,WAAW,EAAE,OAAO,EAAE,eAAe;CAYtF;AAED,eAAe,QAAQ,CAAA"}

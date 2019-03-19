@@ -1,0 +1,44 @@
+import Series from "../series";
+import { AxisOrientation, D3Selection, Datum, EventBus, FlagRendererAccessors, RendererClass, RendererType, SingleRendererOptions, State } from "../../typings";
+export declare type Options = SingleRendererOptions<FlagRendererAccessors>;
+declare class Flag implements RendererClass<FlagRendererAccessors> {
+    private data;
+    private el;
+    private events;
+    options: Options;
+    private position;
+    private scale;
+    private series;
+    private state;
+    type: RendererType;
+    private color;
+    private description;
+    private direction;
+    private label;
+    private opacity;
+    private x;
+    private y;
+    private axis;
+    private axisOffset;
+    private axisPadding;
+    private flagHeight;
+    private flagWidth;
+    constructor(state: State, el: D3Selection, data: Datum[], options: Options, series: Series, events: EventBus);
+    update(data: Datum[], options: Options): void;
+    draw(): void;
+    close(): void;
+    dataForAxis(axis: AxisOrientation): (string | number | Date)[];
+    private validate;
+    private appendSeriesGroup;
+    private setAxisScales;
+    private assignAccessors;
+    private assignConfig;
+    private getAttributes;
+    private positionLabel;
+    private flagPath;
+    private hoverFlagPath;
+    private onFlagHover;
+    private onFlagLeave;
+}
+export default Flag;
+//# sourceMappingURL=flag.d.ts.map
